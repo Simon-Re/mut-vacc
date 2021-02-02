@@ -9,22 +9,46 @@ model.setup(n)
 #%%
 
 deltat = 1.
-T= int(365.*3./deltat)
-model.lockdown_k = [0.0014,0.0005]
-model.beta = 0.22
-model.beta2 = model.beta/3.
-model.beta3 = model.beta*2.5/3.
-model.theta = 0.01
-model.theta2 = 0.01
+T= int(365.*3/deltat)
+Imeas = 0.015*0.1
+model.lockdown_k = [Imeas,0.01*0.02]
+model.beta = 0.18
+model.delta = 1./14.*0.01
+model.gamma = 1./14.*0.99
+model.beta2 = 0.055
+model.beta3 = model.beta
+theta = 1./365.
+model.theta = theta
+model.theta2 = theta
 model.vacctime = 365
 model.k = 1.
 model.mu = 1./180
-model.p = 0.00001*deltat
+model.p = 1e-6
+th = model.vacctime + 1./model.theta*(1.-model.gamma/model.beta3)
 model.N = 10000000
 model.ext_value = 0.1
-model.hesitants = 0.01
+model.hesitants = 0.0
+model.from_stochastic = 100
+model.to_stochastic = 50
 model.small_fraction = 10./model.N
+model.smart_lockdown = False
+model.Xc = 10
+model.michaelis_menten = 0.01
 
 model.run_stochastic(T,deltat)
 
+        
+herd_time = model.vacctime + int(1./model.theta*(1.- model.gamma/model.beta3))
+if herd_time < len(model.graphs['Itot']):
+    print herd_time, model.graphs['Itot'][herd_time][0,0]
+else:
+    print herd_time, model.graphs['Itot'][-1][0,0]
+                           
+
+#%%
+    
 model.plot_me(False)
+title = 'p = 1e-6'
+limes = 100
+model.plot_nice(title,limes)
+
