@@ -5,7 +5,7 @@ This repository contains the relevant code used to simulate the results in <http
 
 ## mutvacc-tools.py
 
-Contains, aside some auxillary functions, the main class and the function **run-stochastic**. This function simulates a population in our extended SIR model for a time period of time T. For details on the model, please see <https://www.medrxiv.org/content/10.1101/2021.02.08.21251383v1>. All relevant paramters can be accessed and modified before a simulation is run. 
+Contains, aside some auxillary functions, the main class and the function **run-stochastic**. This function simulates a population in our extended SIR model for a time period of time T. For details on the model, please see <https://www.medrxiv.org/content/10.1101/2021.02.08.21251383v1>. All relevant parameters can be accessed and modified before a simulation is run. 
 
 ## generate-graphs.py 
 
